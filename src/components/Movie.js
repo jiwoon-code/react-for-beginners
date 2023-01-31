@@ -8,7 +8,7 @@ function Movie({ id, coverImg, title, summary, genres }) {
       <h2>
         <Link to={`/movie/${id}`}>{title}</Link>
       </h2>
-      <p>{summary}</p>
+      <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
       <ul>
         {genres.map((g) => (
           <li key={g}>{g}</li>
@@ -22,8 +22,8 @@ Movie.propTypes = {
   id: PropTypes.number.isRequired,
   coverImg: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  summary: PropTypes.string.isRequired,
 };
 
 export default Movie;
