@@ -1,29 +1,34 @@
-import PropTypes from "prop-types";
+import PropType from "prop-types";
 import { Link } from "react-router-dom";
 
-function Movie({ id, coverImg, title, summary, genres }) {
+import styles from "./Movie.module.css";
+
+function Movie({ id, coverImg, title, year, summary, genres }) {
   return (
-    <div>
-      <img src={coverImg} alt={title} />
-      <h2>
-        <Link to={`/movie/${id}`}>{title}</Link>
-      </h2>
-      <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
-      <ul>
-        {genres.map((g) => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
+    <div className={styles.movie}>
+      <img src={coverImg} alt={title} className={styles.movie__img} />
+      <div>
+        <h2 className={styles.movie__title}>
+          <Link to={`/movie/${id}`}>{title}</Link>
+        </h2>
+        <h3 className={styles.movie__year}>{year}</h3>
+        <ul className={styles.movie__genres}>
+          {genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+        </ul>
+        <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
+      </div>
     </div>
   );
 }
 
-Movie.propTypes = {
-  id: PropTypes.number.isRequired,
-  coverImg: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  summary: PropTypes.string.isRequired,
+Movie.propType = {
+  id: PropType.number.isRequired,
+  coverImg: PropType.string.isRequired,
+  title: PropType.string.isRequired,
+  genres: PropType.arrayOf(PropType.string).isRequired,
+  summary: PropType.string.isRequired,
 };
 
 export default Movie;
